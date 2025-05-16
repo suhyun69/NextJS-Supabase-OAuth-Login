@@ -5,7 +5,7 @@ import { useSession } from '@/components/SessionProvider'
 import { supabase } from '@/lib/supabase-client'
 
 export default function HomeContent() {
-  const session = useSession()
+  const { session, profile } = useSession()
   const [loading, setLoading] = useState(false)
 
   const handleLogin = async () => {
@@ -29,9 +29,9 @@ export default function HomeContent() {
   return (
     <div>
       <h1>홈</h1>
-      {session ? (
+      {session && profile ? (
         <>
-          <p>✅ 로그인됨: {session.user.email}</p>
+          <p>✅ 로그인됨: {profile.nickname}</p>
           <button
             onClick={handleLogout}
             disabled={loading}
