@@ -6,9 +6,13 @@ import HomeContent from '@/components/HomeContent'
 export const dynamic = 'force-dynamic'
 
 export default async function Home() {
+  
+  const cookieStore = await cookies()
+  const headerStore = await headers()
+  
   const supabase = createServerComponentClient<undefined>({
-    cookies: () => cookies(),
-    headers: () => headers(),
+    cookies: () => cookieStore,
+    headers: () => headerStore,
   } as unknown as Parameters<typeof createServerComponentClient>[0])
 
   const {
